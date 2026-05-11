@@ -6,11 +6,12 @@ life cycle costs of utility-scale photovoltaic (PV) systems.
 ## Overview
 This project performs a comprehensive Life Cycle Cost Analysis 
 (LCCA) for large-scale PV systems, comparing different system 
-configurations based on their 20-year total cost of ownership.
+configurations based on their total cost of ownership over the 
+project lifetime.
 
 ## Features
 - CAPEX and OPEX modeling
-- 20-year cash flow analysis
+- Multi-year cash flow analysis
 - Sensitivity analysis on key parameters
 - Visual comparison of system configurations
 
