@@ -95,12 +95,11 @@ def calculate_lcca(system, lifetime=PROJECT_LIFETIME,
 
     return {
         "CAPEX (EUR)": capex,
-        "Total OPEX - NPV (EUR)": round(total_opex, 0),
-        "Total Revenue - NPV (EUR)": round(total_revenue, 0),
+        "Total discounted OPEX (EUR)": round(total_opex, 0),
+        "Total discounted revenue (EUR)": round(total_revenue, 0),
         "LCOE (EUR/kWh)": round(lcoe, 4),
         "NPV (EUR)": round(npv, 0),
     }
-
 
 def run_all_systems():
     """Run the LCCA for every system and return a tidy DataFrame."""
