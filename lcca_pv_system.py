@@ -149,7 +149,7 @@ def sensitivity_analysis(system, variations=np.linspace(-0.3, 0.3, 13)):
 def plot_results(results_df, sensitivity_df):
     labels = list(results_df.index)
     capex_vals = results_df["CAPEX (EUR)"] / 1e6
-    opex_vals = results_df["Total OPEX - NPV (EUR)"] / 1e6
+    opex_vals = results_df["Total discounted OPEX (EUR)"] / 1e6
     npv_vals = results_df["NPV (EUR)"] / 1e6
 
     x = np.arange(len(labels))
