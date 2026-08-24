@@ -21,34 +21,33 @@ import matplotlib.pyplot as plt
 SYSTEMS = {
     "Small PV (1 MW)": {
         "capacity_kw": 1_000,
-        "capex_per_kw": 800,        # EUR/kW
-        "opex_per_kw_year": 15,     # EUR/kW/year
-        "degradation_rate": 0.005,  # 0.5% per year
-        "capacity_factor": 0.15,    # Austria average
+        "capex_per_kw": 650,        # EUR/kW – IEA-PVPS Austria NSR 2024 (utility-scale €500–650)
+        "opex_per_kw_year": 15,     # EUR/kW/year – ~2% of CAPEX, IRENA cost report range
+        "degradation_rate": 0.005,  # 0.5%/yr – standard modern module warranty
+        "capacity_factor": 0.12,    # Austria ~1027 kWh/kWp/yr (Solar_power_in_Austria) → 1027/8760
     },
     "Medium PV (5 MW)": {
         "capacity_kw": 5_000,
-        "capex_per_kw": 700,
+        "capex_per_kw": 580,        # EUR/kW – IEA-PVPS Austria NSR 2024
         "opex_per_kw_year": 12,
         "degradation_rate": 0.005,
-        "capacity_factor": 0.15,
+        "capacity_factor": 0.12,
     },
     "Large PV (10 MW)": {
         "capacity_kw": 10_000,
-        "capex_per_kw": 620,
+        "capex_per_kw": 520,        # EUR/kW – IEA-PVPS Austria NSR 2024 (lower end, economy of scale)
         "opex_per_kw_year": 10,
         "degradation_rate": 0.005,
-        "capacity_factor": 0.15,
+        "capacity_factor": 0.12,
     },
 }
-
 # ─────────────────────────────────────────
 # FINANCIAL PARAMETERS
 # ─────────────────────────────────────────
-PROJECT_LIFETIME = 25       # years
-DISCOUNT_RATE = 0.05        # 5%
-ELECTRICITY_PRICE = 0.10    # EUR/kWh
-HOURS_PER_YEAR = 8_760
+PROJECT_LIFETIME = 25       # years – standard PV lifetime (25–30)
+DISCOUNT_RATE = 0.05        # 5% – conventional; run sensitivity at 3% and 7%
+ELECTRICITY_PRICE = 0.06    # EUR/kWh – Austrian utility PPA range €0.05–0.06 (adjust if retail offset)
+HOURS_PER_YEAR = 8760      # 24 × 365
 
 
 # ─────────────────────────────────────────
