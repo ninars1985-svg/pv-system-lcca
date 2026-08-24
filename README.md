@@ -1,33 +1,24 @@
 # PV System Life Cycle Cost Analysis (LCCA)
 
-A Python-based techno-economic model for evaluating the life cycle cost of
-utility-scale photovoltaic (PV) systems. The model compares several system
-sizes on the basis of their total cost of ownership over the project lifetime
-and computes the Levelised Cost of Electricity (LCOE) and Net Present Value (NPV).
+A Python model that works out what utility-scale solar PV plants really cost over their whole lifetime. It compares a few plant sizes and calculates the two numbers that matter most in energy economics: the Levelised Cost of Electricity (LCOE) and the Net Present Value (NPV).
 
 ## Overview
 
-Utility-scale PV projects differ widely in their economics depending on size,
-CAPEX, operating costs and financing assumptions. This project performs a
-comprehensive Life Cycle Cost Analysis (LCCA) for three representative system
-sizes (1 MW, 5 MW and 10 MW) and quantifies how the key financial drivers
-affect the outcome through a one-way sensitivity analysis.
+The economics of a PV plant depend heavily on its size, its upfront cost, how much it costs to run, and the financing assumptions behind it. This project runs a full Life Cycle Cost Analysis for three plant sizes — 1 MW, 5 MW and 10 MW — and then checks how sensitive the result is to the main financial drivers. All figures are set for Austrian conditions.
 
 ## Methodology
 
-All cash flows and energy volumes are discounted to present value at a common
-discount rate. Annual energy yield declines each year according to a fixed
-panel degradation rate.
+Every cost and every unit of energy is discounted back to today's value using the same discount rate. The panels also lose a little output each year, so the annual energy yield falls over time.
 
-The Levelised Cost of Electricity is computed as the ratio of discounted
-lifetime cost to discounted lifetime energy:
+LCOE is the ratio of total discounted cost to total discounted energy:
 
 ```
 LCOE = (CAPEX + Σ discounted OPEX) / (Σ discounted energy)
 ```
 
-Net Present Value is the discounted revenue less the discounted costs, with
-CAPEX incurred at year zero:
+Cost and energy are discounted at the same rate. That isn't a quirk — it drops out of solving NPV = 0 for the price, which is the correct way to level a cost.
+
+NPV is the discounted revenue minus the discounted costs, with the CAPEX paid up front in year zero:
 
 ```
 NPV = Σ discounted revenue − CAPEX − Σ discounted OPEX
@@ -35,28 +26,27 @@ NPV = Σ discounted revenue − CAPEX − Σ discounted OPEX
 
 ## Key assumptions
 
-| Parameter          | Value            |
-| ------------------ | ---------------- |
-| Project lifetime   | 25 years         |
-| Discount rate      | 5%               |
-| Electricity price  | 0.10 EUR/kWh     |
-| Degradation rate   | 0.5% per year    |
-| Capacity factor    | 0.15 (Austria)   |
+| Parameter | Value |
+| --- | --- |
+| Project lifetime | 25 years |
+| Discount rate | 5% |
+| Electricity price | 0.06 EUR/kWh |
+| Degradation rate | 0.5% per year |
+| Capacity factor | 0.12 (Austria) |
 
-System-specific CAPEX and OPEX values reflect economies of scale, with larger
-systems benefiting from lower per-kW costs.
+The capacity factor of 0.12 reflects Austria's solar yield of roughly 1,000 kWh per kWp a year. CAPEX and OPEX per kW are lower for the bigger plants, which is where economies of scale show up. The cost figures are based on IEA-PVPS Austria (2024) and IRENA's Renewable Power Generation Costs, which put utility-scale PV in Austria at around 500–650 EUR/kW.
 
 ## Results (base case)
 
-| System           | CAPEX (M€) | LCOE (€/kWh) | NPV (M€) |
-| ---------------- | ---------- | ------------ | -------- |
-| Small PV (1 MW)  | 0.80       | 0.06         | 0.75     |
-| Medium PV (5 MW) | 3.50       | 0.05         | 4.44     |
-| Large PV (10 MW) | 6.20       | 0.04         | 9.97     |
+| System | CAPEX (M€) | LCOE (€/kWh) | NPV (M€) |
+| --- | --- | --- | --- |
+| Small PV (1 MW) | 0.65 | 0.06 | −0.02 |
+| Medium PV (5 MW) | 2.90 | 0.05 | 0.47 |
+| Large PV (10 MW) | 5.20 | 0.05 | 1.83 |
 
-Larger systems achieve a lower LCOE and a higher NPV, driven by lower per-kW
-CAPEX and OPEX. The sensitivity analysis shows that NPV is most responsive to
-the electricity price, followed by the discount rate and CAPEX.
+The two larger plants are cheaper per kWh and clearly profitable, thanks to their lower per-kW costs. The 1 MW plant is the exception: at an electricity price of 0.06 €/kWh its NPV comes out slightly negative, so at that price it doesn't quite pay for itself. The LCOE values line up with published Austrian utility-scale figures of about 0.04–0.06 €/kWh, which is a good sign that the model behaves realistically.
+
+The sensitivity analysis shows the electricity price moves the NPV more than anything else, followed by the discount rate and then CAPEX. Put simply, the price you can sell power at is the biggest risk to the project.
 
 ![LCCA results](lcca_results.png)
 
@@ -66,9 +56,9 @@ the electricity price, followed by the discount rate and CAPEX.
 - Discounted multi-year cash flow analysis
 - Discounted LCOE and NPV calculation
 - One-way sensitivity analysis on electricity price, discount rate and CAPEX
-- Visual comparison of system configurations
+- Visual comparison of the three plant sizes
 
-## Technologies
+## Built with
 
 - Python 3.x
 - NumPy
@@ -91,8 +81,7 @@ Run the analysis:
 python lcca_pv_system.py
 ```
 
-The script prints the results and sensitivity tables to the console and saves
-the comparison charts as `lcca_results.png`.
+The script prints the result and sensitivity tables to the console and saves the comparison charts as `lcca_results.png`.
 
 ## Author
 
@@ -102,5 +91,4 @@ Research experience at the Austrian Institute of Technology (AIT)
 
 ## License
 
-This project is released under the MIT License. See the [LICENSE](LICENSE) file
-for details.
+Released under the MIT License. See the [LICENSE](LICENSE) file for details.
