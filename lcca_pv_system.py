@@ -157,7 +157,7 @@ def plot_results(results_df, sensitivity_df):
 
     fig, axes = plt.subplots(1, 3, figsize=(18, 6))
     fig.suptitle(
-        "PV System Life Cycle Cost Analysis\nNina Ranjbar Sistani — AIT Research",
+        "PV System Life Cycle Cost Analysis",
         fontsize=13, fontweight="bold",
     )
 
